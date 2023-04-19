@@ -43,12 +43,12 @@ async function onSubmit(e: ChangeEvent<HTMLFormElement>){
         alert('Dados incorretos.');
     }
 
-    useEffect(() => {
-        if(token !== '') {
-          history('/home')
-        }
-      }, [token])
 }
+useEffect(() => {
+    if(token !== '') {
+      history('/home')
+    }
+  }, [token])
 
     return(
     <>
