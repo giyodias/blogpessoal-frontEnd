@@ -6,6 +6,9 @@ import './App.css'
 import Login from './paginas/login/Login'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import CadastroUsuario from './paginas/cadastroUsuario/CadastroUsuario'
+import CadastrarPostagem from './components/postagens/cadastrarPostagem/CadastrarPostagem'
+import CadastrarTema from './components/temas/cadastrarTema/CadastrarTema'
+import DeletarTema from './components/temas/deletarTema/DeletarTema';
 
 function App() {
 
@@ -19,11 +22,19 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/home' element={<Home/>}/>
           <Route path='/cadastrousuario' element={<CadastroUsuario/>}/>
+        
+          <Route exact path='/formularioPostagem' element={<CadastrarPostagem/>}/>
+          <Route exact path='/formularioPostagem/:id' element={<CadastrarPostagem/>}/>
+          <Route exact path='/formularioTema' element={<CadastrarTema/>}/>
+          <Route exact path='/formularioTema/:id' element={<CadastrarTema/>}/>
+          <Route exact path='/deletarPostagem/:id' element={<DeletarPostagem/>}/>
+          <Route exact path='/deletarTema:/id' element={<DeletarTema/>}/>
+        
+        
         </Routes>
       </div>
       <Footer/>
     </BrowserRouter>
-    
     </>
   )
 }
