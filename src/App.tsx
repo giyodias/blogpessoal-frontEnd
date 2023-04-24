@@ -9,6 +9,7 @@ import CadastroUsuario from './paginas/cadastroUsuario/CadastroUsuario'
 import CadastrarPostagem from './components/postagens/cadastrarPostagem/CadastrarPostagem'
 import CadastrarTema from './components/temas/cadastrarTema/CadastrarTema'
 import DeletarTema from './components/temas/deletarTema/DeletarTema';
+import DeletarPostagem from './components/postagens/deletarpostagem/DeletarPostagem'
 
 function App() {
 
@@ -23,12 +24,12 @@ function App() {
           <Route path='/home' element={<Home/>}/>
           <Route path='/cadastrousuario' element={<CadastroUsuario/>}/>
         
-          <Route exact path='/formularioPostagem' element={<CadastrarPostagem/>}/>
-          <Route exact path='/formularioPostagem/:id' element={<CadastrarPostagem/>}/>
-          <Route exact path='/formularioTema' element={<CadastrarTema/>}/>
-          <Route exact path='/formularioTema/:id' element={<CadastrarTema/>}/>
-          <Route exact path='/deletarPostagem/:id' element={<DeletarPostagem/>}/>
-          <Route exact path='/deletarTema:/id' element={<DeletarTema/>}/>
+          <Route path='/formularioPostagem' element={<CadastrarPostagem/>}/>
+          <Route path='/formularioPostagem/:id' element={<CadastrarPostagem/>}/>
+          <Route path='/formularioTema' element={<CadastrarTema/>}/>
+          <Route path='/formularioTema/:id' element={<CadastrarTema/>}/>
+          <Route path='/deletarPostagem/:id' element={<DeletarPostagem/>}/>
+          <Route path='/deletarTema:/id' element={<DeletarTema/>}/>
         
         
         </Routes>
