@@ -3,12 +3,20 @@ import { Grid, Typography } from '@material-ui/core';
 import Box from '@mui/material/Box';
 import GithubIcon from '@material-ui/icons/Github';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokenReducer';
 
 
 function Footer() {
-    return (
-    <>
-    <Grid /*o footer tem somente um grid pois é uma faixa */
+
+  const token = useSelector<TokenState, TokenState['token']>(
+    (state) => state.token
+  )
+  
+var footerComponent;
+
+if(token !== ''){
+<Grid /*o footer tem somente um grid pois é uma faixa */
     /*abaixo temos as caracteristicas do grid*/
     container /*classifica o grid como container(contém outras coisas)*/
     direction="row" /*classifica a direção como linear, já que é um footer */
@@ -64,6 +72,11 @@ function Footer() {
             </Box>
         </Box>
     </Grid>
+}
+
+    return (
+    <>
+    {footerComponent}
     </>
     )
   }

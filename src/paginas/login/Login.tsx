@@ -7,12 +7,16 @@ import './Login.css'
 import UsuarioLogin from '../../models/UsuarioLogin';
 import useLocalStorage from 'react-use-localstorage'
 import { login } from '../../services/Service';
+import { useDispatch } from 'react-redux';
+import { addToken } from '../../store/tokens/action';
 
 function Login(){
 
     const history= useNavigate();
 
-    const [token, setToken] = useLocalStorage('token');
+    const dispatch = useDispatch();
+
+    const [token, setToken] = useState('');
 
 const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
     {
@@ -46,7 +50,8 @@ async function onSubmit(e: ChangeEvent<HTMLFormElement>){
 }
 useEffect(() => {
     if(token !== '') {
-      history('/home')
+        dispatch(addToken(token))
+        history('/home')
     }
   }, [token])
 

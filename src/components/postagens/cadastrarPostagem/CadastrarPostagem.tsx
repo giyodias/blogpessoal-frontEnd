@@ -1,17 +1,23 @@
 import { Button, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useLocalStorage from "react-use-localstorage";
 import Postagem from "../../../models/Postagem";
 import Tema from "../../../models/Tema";
 import { buscaId, put, post, busca } from '../../../services/Service';
+import { TokenState } from "../../../store/tokens/tokenReducer";
+import { useSelector } from "react-redux";
 
 function CadastrarPostagem(){
 
 const history = useNavigate();
+
 const {id} = useParams<{id: string}>();
-const [temas, setTemas] = useState<Tema[]>([])
-const [token, setToken] = useLocalStorage('token');
+
+const [temas, setTemas] = useState<Tema[]>([]);
+
+const token = useSelector<TokenState, TokenState['token']>(
+    (state) => state.token
+  );
 
 useEffect(() => {
     if (token === ''){
