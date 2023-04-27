@@ -1,14 +1,15 @@
 import { TextField } from '@material-ui/core';
 import { Grid, Typography, Button } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import React, {useState, ChangeEvent, useEffect} from 'react';
 import './Login.css'
 import UsuarioLogin from '../../models/UsuarioLogin';
-import useLocalStorage from 'react-use-localstorage'
 import { login } from '../../services/Service';
 import { useDispatch } from 'react-redux';
-import { addToken } from '../../store/tokens/action';
+import { addId, addToken } from '../../store/tokens/action';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login(){
 
@@ -29,6 +30,25 @@ const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
     }
 )
 
+const [respUsuarioLogin, setRespUsuarioLogin] = useState<UsuarioLogin>(
+    {
+        id: 0,
+        usuario: '',
+        nome: '',
+        senha: '',
+        foto: '',
+        token: ''
+    }
+)
+
+useEffect(()=> {
+    if(respUsuarioLogin.token !== ''){
+        dispatch(addToken(respUsuarioLogin.token))
+        dispatch(addId(respUsuarioLogin.id.toString()))
+        history('/home');
+    }
+}, [respUsuarioLogin.token])
+
 function updateModel(e: ChangeEvent<HTMLInputElement>){
     setUsuarioLogin({
         ...usuarioLogin,
@@ -39,12 +59,30 @@ function updateModel(e: ChangeEvent<HTMLInputElement>){
 async function onSubmit(e: ChangeEvent<HTMLFormElement>){
     e.preventDefault();
     try{
-        await login('/usuarios/logar', usuarioLogin, setToken)
-        alert('Usuário logado com sucesso');
+        await login('/usuarios/logar', usuarioLogin, setRespUsuarioLogin)
+        toast.success('Usuário logado com sucesso!', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
 
     }catch(error){
         console.log(error);
-        alert('Dados incorretos.');
+        toast.error('Dados incorretos.', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
     }
 
 }

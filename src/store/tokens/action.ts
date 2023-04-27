@@ -1,9 +1,15 @@
 export type Action = {
-    type: "ADD_TOKEN"; 
+    type: "ADD_TOKEN" | "ADD_ID"; 
     payload: string
 }
 
 export const addToken = (token: string): Action =>({
     type: "ADD_TOKEN",
     payload: token
+})
+
+//adicional
+export const addId = (id:string): Action => ({
+    type: "ADD_ID",
+    payload: id
 })

@@ -4,7 +4,7 @@ interface UsuarioLogin{
     usuario: string
     senha: string
     foto: string
-    token?: string | null //ou vai ser string ou vai ser null
+    token: string //ou vai ser string ou vai ser null
 }
 
 export default UsuarioLogin
